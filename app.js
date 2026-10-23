@@ -12,8 +12,8 @@ const CATS = {
 
 // ramp satu keluarga warna: identitas segmen dibawa label, bukan warna acak
 const RAMP = {
-  light: ['#0B6B5D', '#2F8B7B', '#57A79A', '#86C3B7', '#B0D6CE', '#D3E7E2'],
-  dark: ['#63C7B1', '#4FAE99', '#3E9080', '#33776A', '#2A5E55', '#234A42'],
+  light: ['#6CABDD', '#5494C8', '#3D7DB3', '#7BB8E8', '#9CCAF0', '#BDDCF5'],
+  dark: ['#6CABDD', '#5494C8', '#3D7DB3', '#7BB8E8', '#9CCAF0', '#BDDCF5'],
 };
 
 const rupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 });
@@ -663,12 +663,23 @@ function init() {
   });
 }
 
-function updateActiveTab() {
-  const cur = location.hash || '#riwayat';
-  document.querySelectorAll('.topnav .tab-link').forEach((a) => {
-    a.classList.toggle('active', a.getAttribute('href') === cur);
+function switchTab() {
+  const hash = location.hash || '#riwayat';
+  const panels = document.querySelectorAll('.tab-panel');
+  const links = document.querySelectorAll('.topnav .tab-link');
+  let matched = false;
+  panels.forEach((p) => {
+    const show = '#' + p.id === hash;
+    if (show) matched = true;
+    p.toggleAttribute('data-tab-hidden', !show);
   });
+  links.forEach((a) => {
+    a.classList.toggle('active', a.getAttribute('href') === hash);
+  });
+  if (!matched && panels.length) {
+    location.hash = '#riwayat';
+  }
 }
-window.addEventListener('hashchange', updateActiveTab);
+window.addEventListener('hashchange', switchTab);
 init();
-updateActiveTab();
+switchTab();

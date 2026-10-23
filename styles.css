@@ -7,8 +7,8 @@
   --surface-2: #FFFFFF;
   --text: #121B1A;
   --muted: #55625F;
-  --line: #D5DAD3;
-  --line-strong: #BFC6BE;
+  --line: #C8D8E8;
+  --line-strong: #A8C0D8;
   --accent: #6CABDD;
   --on-accent: #FFFFFF;
   --income: #146B4F;
@@ -23,21 +23,21 @@
 }
 
 [data-theme="dark"] {
-  --bg-a: #0B1413;
-  --bg-b: #101D1B;
-  --surface: #141E1D;
-  --surface-2: #1A2524;
-  --text: #E9EFEB;
-  --muted: #9FAEAA;
-  --line: #2A3735;
-  --line-strong: #3B4A47;
-  --accent: #63C7B1;
-  --on-accent: #071110;
+  --bg-a: #0F1923;
+  --bg-b: #0F1923;
+  --surface: #152232;
+  --surface-2: #1A2A3E;
+  --text: #E4ECF4;
+  --muted: #8DA3B8;
+  --line: #1E3248;
+  --line-strong: #2A4460;
+  --accent: #6CABDD;
+  --on-accent: #0F1923;
   --income: #5FCCA1;
   --expense: #EC9C83;
   --danger: #EC9C83;
-  --glass-bg: rgba(20, 30, 29, 0.5);
-  --glass-edge: rgba(233, 239, 235, 0.14);
+  --glass-bg: rgba(21, 34, 50, 0.6);
+  --glass-edge: rgba(108, 171, 221, 0.15);
   --shadow: 0 26px 60px -34px rgba(0, 0, 0, 0.85);
 }
 
@@ -53,7 +53,7 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: var(--text);
-  background: #FFFFFF;
+  background: var(--bg-a);
 }
 
 h1, h2 { margin: 0; font-weight: 600; letter-spacing: -0.015em; }
@@ -101,7 +101,8 @@ a { color: var(--accent); }
   color: var(--muted); text-decoration: none; font-size: 0.9rem;
   border-bottom: 2px solid transparent;
 }
-.topnav a:hover { color: var(--text); border-bottom-color: var(--line-strong); }
+.topnav a:hover { color: var(--text); }
+.topnav a.active:hover { color: #fff; }
 .theme-btn { margin-left: 4px; }
 .i-moon { display: none; }
 [data-theme="dark"] .i-sun { display: none; }
@@ -178,11 +179,11 @@ main {
 .balance-note { margin-top: 14px; font-size: 0.78rem; color: var(--muted); }
 
 /* tab panels: 1 fitur 1 tempat — hanya satu panel terlihat per waktu */
-.tab-panels { position: relative; }
-.tab-panel { display: none; }
-.tab-panel:target { display: block; }
+.tab-panels { position: relative; display: grid; gap: inherit; }
+.tab-panel[data-tab-hidden] { display: none; }
 .entry { position: sticky; top: 78px; }
-.tab-link.active { color: var(--text); border-bottom-color: var(--accent); }
+.tab-link.active { background: var(--accent); color: #fff; border-radius: var(--radius-ctl); border-bottom-color: transparent; }
+[data-theme="dark"] .tab-link.active { background: var(--accent); color: #0B1413; }
 
 .ledger, .analysis, .data {
   background: var(--surface);
