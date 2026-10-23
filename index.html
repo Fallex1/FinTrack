@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#E8EDE9">
+<title>FinTrack, catatan keuangan lokal</title>
+<meta name="description" content="Catat pemasukan dan pengeluaran harian. Data tersimpan di browser, tanpa akun, tanpa server.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B6B5D'/%3E%3Cpath d='M9 11h14M9 16h14M9 21h8' stroke='%23F1F0EA' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Lewati ke konten</a>
+
+<header class="topbar">
+  <p class="brand">FinTrack</p>
+  <nav class="topnav" aria-label="Bagian halaman">
+    <a href="#catat">Catat</a>
+    <a href="#riwayat">Riwayat</a>
+    <a href="#analisis">Analisis</a>
+    <a href="#data">Data</a>
+  </nav>
+  <button type="button" class="icon-btn theme-btn" id="theme-btn" aria-pressed="false">
+    <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+    <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.4A8.4 8.4 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4Z"/></svg>
+    <span class="sr-only">Ganti tema</span>
+  </button>
+</header>
+
+<main id="main">
+
+  <section class="balance glass" aria-labelledby="balance-title">
+    <div class="balance-head">
+      <h1 id="balance-title">Saldo bersih</h1>
+      <p class="storage" id="storage-status">Menyiapkan penyimpanan lokal</p>
+    </div>
+    <p class="balance-value" id="balance-value">Rp 0</p>
+    <dl class="balance-split">
+      <div>
+        <dt>Pemasukan</dt>
+        <dd id="total-income">Rp 0</dd>
+      </div>
+      <div>
+        <dt>Pengeluaran</dt>
+        <dd id="total-expense">Rp 0</dd>
+      </div>
+      <div>
+        <dt>Transaksi</dt>
+        <dd id="total-count">0</dd>
+      </div>
+    </dl>
+    <p class="balance-note">Semua angka dihitung dari catatan di perangkat ini, bukan perkiraan.</p>
+  </section>
+
+  <div class="work">
+    <section class="ledger" id="riwayat" aria-labelledby="ledger-title">
+      <div class="section-head">
+        <h2 id="ledger-title">Riwayat</h2>
+        <p class="count" id="list-count"></p>
+      </div>
+
+      <div class="controls">
+        <div class="segmented" role="group" aria-label="Rentang waktu">
+          <button type="button" data-range="hari" aria-pressed="false">Hari ini</button>
+          <button type="button" data-range="bulan" aria-pressed="true">Bulan ini</button>
+          <button type="button" data-range="semua" aria-pressed="false">Semua</button>
+        </div>
+        <p class="field search">
+          <label for="q">Cari catatan atau kategori</label>
+          <input type="search" id="q" placeholder="kopi, tagihan, gaji" autocomplete="off">
+        </p>
+      </div>
+
+      <p class="alert" id="store-error" role="alert" hidden></p>
+
+      <ul class="rows" id="rows"></ul>
+
+      <div class="empty" id="empty" hidden>
+        <p id="empty-text">Belum ada catatan di rentang ini.</p>
+        <a class="link" href="#catat" id="empty-cta">Catat transaksi pertama</a>
+      </div>
+
+      <button type="button" class="more" id="more" hidden>Muat 200 catatan lagi</button>
+    </section>
+
+    <section class="entry glass" id="catat" aria-labelledby="entry-title">
+      <div class="section-head">
+        <h2 id="entry-title">Catat transaksi</h2>
+        <p class="count" id="entry-mode">Baru</p>
+      </div>
+
+      <form id="tx-form" novalidate>
+        <fieldset class="type-toggle">
+          <legend>Jenis</legend>
+          <label class="type-opt">
+            <input type="radio" name="type" value="pengeluaran" checked>
+            <span>Pengeluaran</span>
+          </label>
+          <label class="type-opt">
+            <input type="radio" name="type" value="pemasukan">
+            <span>Pemasukan</span>
+          </label>
+        </fieldset>
+
+        <p class="field">
+          <label for="amount">Nominal</label>
+          <span class="money-input">
+            <span class="prefix" aria-hidden="true">Rp</span>
+            <input type="number" id="amount" name="amount" inputmode="decimal" min="1" step="any" placeholder="25000" required>
+          </span>
+        </p>
+
+        <p class="field">
+          <label for="category">Kategori</label>
+          <select id="category" name="category"></select>
+        </p>
+
+        <p class="field">
+          <label for="date">Tanggal</label>
+          <input type="date" id="date" name="date" required>
+        </p>
+
+        <p class="field">
+          <label for="note">Catatan <span class="hint">(opsional)</span></label>
+          <input type="text" id="note" name="note" maxlength="80" placeholder="Beli kopi" autocomplete="off">
+        </p>
+
+        <p class="alert" id="form-error" role="alert" hidden></p>
+
+        <div class="form-actions">
+          <button type="submit" class="primary" id="submit-btn">Simpan transaksi</button>
+          <button type="button" class="ghost" id="cancel-edit" hidden>Batal ubah</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <section class="analysis" id="analisis" aria-labelledby="analysis-title">
+    <div class="section-head">
+      <h2 id="analysis-title">Analisis</h2>
+      <p class="count">Dua grafik dari data yang sama dengan daftar di atas.</p>
+    </div>
+
+    <div class="charts">
+      <figure class="chart">
+        <figcaption>
+          <span class="q">Masuk dan keluar per bulan, 6 bulan terakhir</span>
+          <span class="legend">
+            <span class="key key-in">Pemasukan</span>
+            <span class="key key-out">Pengeluaran</span>
+          </span>
+        </figcaption>
+        <svg id="bar-chart" viewBox="0 0 520 230" role="img" aria-labelledby="bar-title bar-desc" preserveAspectRatio="xMidYMid meet">
+          <title id="bar-title">Pemasukan dan pengeluaran per bulan</title>
+          <desc id="bar-desc">Belum ada data.</desc>
+        </svg>
+      </figure>
+
+      <figure class="chart">
+        <figcaption>
+          <span class="q">Pengeluaran bulan ini per kategori</span>
+        </figcaption>
+        <div class="donut-wrap">
+          <svg id="donut-chart" viewBox="0 0 180 180" role="img" aria-labelledby="donut-title donut-desc">
+            <title id="donut-title">Distribusi pengeluaran per kategori</title>
+            <desc id="donut-desc">Belum ada pengeluaran bulan ini.</desc>
+          </svg>
+          <ul class="donut-legend" id="donut-legend"></ul>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="data" id="data" aria-labelledby="data-title">
+    <div class="section-head">
+      <h2 id="data-title">Data</h2>
+      <p class="count">Tidak ada server. File cadangan satu-satunya cara pindah perangkat.</p>
+    </div>
+    <div class="data-actions">
+      <button type="button" class="ghost" id="export-json">Unduh JSON</button>
+      <button type="button" class="ghost" id="export-csv">Unduh CSV</button>
+      <label class="ghost file-label" for="import-file">Impor JSON</label>
+      <input type="file" id="import-file" accept="application/json,.json" hidden>
+      <button type="button" class="danger" id="reset-btn">Hapus semua data</button>
+    </div>
+    <p class="alert" id="data-note" role="status" hidden></p>
+    <p class="data-note">Impor menambahkan catatan baru dan tidak menghapus yang sudah ada. Catatan dengan id sama dilewati.</p>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p>FinTrack. Data milikmu, tersimpan di browser ini. Jalan offline setelah halaman dimuat.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden>
+  <span id="toast-text"></span>
+  <button type="button" class="toast-btn" id="toast-undo">Urungkan</button>
+</div>
+
+<dialog id="reset-dialog" aria-labelledby="reset-title">
+  <h2 id="reset-title">Hapus semua data?</h2>
+  <p>Seluruh catatan di browser ini dihapus permanen. Kalau belum punya cadangan, unduh JSON dulu.</p>
+  <div class="form-actions">
+    <button type="button" class="danger" id="reset-confirm">Ya, hapus semua</button>
+    <button type="button" class="ghost" id="reset-cancel">Batal</button>
+  </div>
+</dialog>
+
+<p class="sr-only" id="announcer" aria-live="polite"></p>
+
+<script src="app.js"></script>
+</body>
+</html>
