@@ -210,5 +210,11 @@
 <p class="sr-only" id="announcer" aria-live="polite"></p>
 
 <script src="app.js"></script>
+<script>
+  // Capacitor bridge: only loads inside native WebView, no-op in browser
+  if (window.Capacitor && window.Capacitor.isNativePlatform()) {
+    document.documentElement.dataset.native = 'true';
+  }
+</script>
 </body>
 </html>
