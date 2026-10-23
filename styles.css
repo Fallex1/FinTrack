@@ -1,20 +1,20 @@
 /* FinTrack, tokens + layout. Arah desain ada di DESIGN.md. */
 
 :root {
-  --bg-a: #E9EEE9;
-  --bg-b: #DCE6E3;
-  --surface: #FBFAF6;
-  --surface-2: #F2F1EA;
+  --bg-a: #FFFFFF;
+  --bg-b: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-2: #FFFFFF;
   --text: #121B1A;
   --muted: #55625F;
   --line: #D5DAD3;
   --line-strong: #BFC6BE;
-  --accent: #0B6B5D;
+  --accent: #6CABDD;
   --on-accent: #FFFFFF;
   --income: #146B4F;
   --expense: #9C3F2C;
   --danger: #9C3F2C;
-  --glass-bg: rgba(251, 250, 246, 0.52);
+  --glass-bg: rgba(251, 255, 246, 0.52);
   --glass-edge: rgba(255, 255, 255, 0.7);
   --shadow: 0 26px 60px -34px rgba(18, 27, 26, 0.5);
   --radius: 14px;
@@ -53,7 +53,7 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: var(--text);
-  background: linear-gradient(158deg, var(--bg-a) 0%, var(--bg-b) 62%, var(--bg-a) 100%) fixed;
+  background: #FFFFFF;
 }
 
 h1, h2 { margin: 0; font-weight: 600; letter-spacing: -0.015em; }
@@ -177,12 +177,12 @@ main {
 #total-expense { color: var(--expense); }
 .balance-note { margin-top: 14px; font-size: 0.78rem; color: var(--muted); }
 
-/* work area */
-.work { display: grid; gap: inherit; align-items: start; }
-@media (min-width: 900px) {
-  .work { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
-  .entry { position: sticky; top: 78px; }
-}
+/* tab panels: 1 fitur 1 tempat — hanya satu panel terlihat per waktu */
+.tab-panels { position: relative; }
+.tab-panel { display: none; }
+.tab-panel:target { display: block; }
+.entry { position: sticky; top: 78px; }
+.tab-link.active { color: var(--text); border-bottom-color: var(--accent); }
 
 .ledger, .analysis, .data {
   background: var(--surface);

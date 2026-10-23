@@ -8,6 +8,7 @@
 <meta name="description" content="Catat pemasukan dan pengeluaran harian. Data tersimpan di browser, tanpa akun, tanpa server.">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B6B5D'/%3E%3Cpath d='M9 11h14M9 16h14M9 21h8' stroke='%23F1F0EA' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>if(!location.hash)location.replace('#riwayat')</script>
 </head>
 <body>
 <a class="skip" href="#main">Lewati ke konten</a>
@@ -15,10 +16,10 @@
 <header class="topbar">
   <p class="brand">FinTrack</p>
   <nav class="topnav" aria-label="Bagian halaman">
-    <a href="#catat">Catat</a>
-    <a href="#riwayat">Riwayat</a>
-    <a href="#analisis">Analisis</a>
-    <a href="#data">Data</a>
+    <a class="tab-link" href="#catat">Catat</a>
+    <a class="tab-link" href="#riwayat">Riwayat</a>
+    <a class="tab-link" href="#analisis">Analisis</a>
+    <a class="tab-link" href="#data">Data</a>
   </nav>
   <button type="button" class="icon-btn theme-btn" id="theme-btn" aria-pressed="false">
     <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
@@ -52,8 +53,8 @@
     <p class="balance-note">Semua angka dihitung dari catatan di perangkat ini, bukan perkiraan.</p>
   </section>
 
-  <div class="work">
-    <section class="ledger" id="riwayat" aria-labelledby="ledger-title">
+  <div class="tab-panels">
+    <section class="tab-panel ledger" id="riwayat" aria-labelledby="ledger-title">
       <div class="section-head">
         <h2 id="ledger-title">Riwayat</h2>
         <p class="count" id="list-count"></p>
@@ -83,7 +84,7 @@
       <button type="button" class="more" id="more" hidden>Muat 200 catatan lagi</button>
     </section>
 
-    <section class="entry glass" id="catat" aria-labelledby="entry-title">
+    <section class="tab-panel entry glass" id="catat" aria-labelledby="entry-title">
       <div class="section-head">
         <h2 id="entry-title">Catat transaksi</h2>
         <p class="count" id="entry-mode">Baru</p>
@@ -135,7 +136,7 @@
     </section>
   </div>
 
-  <section class="analysis" id="analisis" aria-labelledby="analysis-title">
+  <section class="tab-panel analysis" id="analisis" aria-labelledby="analysis-title">
     <div class="section-head">
       <h2 id="analysis-title">Analisis</h2>
       <p class="count">Dua grafik dari data yang sama dengan daftar di atas.</p>
@@ -171,7 +172,7 @@
     </div>
   </section>
 
-  <section class="data" id="data" aria-labelledby="data-title">
+  <section class="tab-panel data" id="data" aria-labelledby="data-title">
     <div class="section-head">
       <h2 id="data-title">Data</h2>
       <p class="count">Tidak ada server. File cadangan satu-satunya cara pindah perangkat.</p>

@@ -389,7 +389,7 @@ function startEdit(id) {
   $('submit-btn').textContent = 'Simpan perubahan';
   $('cancel-edit').hidden = false;
   $('form-error').hidden = true;
-  $('catat').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  location.hash = '#catat';
   $('amount').focus();
 }
 
@@ -663,4 +663,12 @@ function init() {
   });
 }
 
+function updateActiveTab() {
+  const cur = location.hash || '#riwayat';
+  document.querySelectorAll('.topnav .tab-link').forEach((a) => {
+    a.classList.toggle('active', a.getAttribute('href') === cur);
+  });
+}
+window.addEventListener('hashchange', updateActiveTab);
 init();
+updateActiveTab();
