@@ -1,44 +1,46 @@
 /* FinTrack, tokens + layout. Arah desain ada di DESIGN.md. */
 
 :root {
-  --bg-a: #FFFFFF;
+  /* Light mode: clean white + light blue */
+  --bg-a: #F8FAFC;
   --bg-b: #FFFFFF;
   --surface: #FFFFFF;
-  --surface-2: #FFFFFF;
-  --text: #121B1A;
-  --muted: #55625F;
-  --line: #C8D8E8;
-  --line-strong: #A8C0D8;
+  --surface-2: #F1F5FD;
+  --text: #0F172A;
+  --muted: #475569;
+  --line: #E4ECFC;
+  --line-strong: #CBD5E1;
   --accent: #6CABDD;
-  --on-accent: #FFFFFF;
-  --income: #146B4F;
-  --expense: #9C3F2C;
-  --danger: #9C3F2C;
-  --glass-bg: rgba(251, 255, 246, 0.52);
-  --glass-edge: rgba(255, 255, 255, 0.7);
-  --shadow: 0 26px 60px -34px rgba(18, 27, 26, 0.5);
+  --on-accent: #0F172A;
+  --income: #166534;
+  --expense: #B91C1C;
+  --danger: #B91C1C;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-edge: rgba(108, 171, 221, 0.25);
+  --shadow: 0 8px 32px -16px rgba(11, 23, 42, 0.12);
   --radius: 14px;
   --radius-ctl: 10px;
   --font: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 [data-theme="dark"] {
-  --bg-a: #0F1923;
-  --bg-b: #0F1923;
-  --surface: #152232;
-  --surface-2: #1A2A3E;
-  --text: #E4ECF4;
-  --muted: #8DA3B8;
-  --line: #1E3248;
-  --line-strong: #2A4460;
+  /* Dark mode: navy blue + light blue accent */
+  --bg-a: #0F172A;
+  --bg-b: #111827;
+  --surface: #1E293B;
+  --surface-2: #1E293B;
+  --text: #F1F5F9;
+  --muted: #94A3B8;
+  --line: #374151;
+  --line-strong: #4B5563;
   --accent: #6CABDD;
-  --on-accent: #0F1923;
-  --income: #5FCCA1;
-  --expense: #EC9C83;
-  --danger: #EC9C83;
-  --glass-bg: rgba(21, 34, 50, 0.6);
-  --glass-edge: rgba(108, 171, 221, 0.15);
-  --shadow: 0 26px 60px -34px rgba(0, 0, 0, 0.85);
+  --on-accent: #0F172A;
+  --income: #22C55E;
+  --expense: #F87171;
+  --danger: #F87171;
+  --glass-bg: rgba(30, 41, 59, 0.7);
+  --glass-edge: rgba(108, 171, 221, 0.25);
+  --shadow: 0 8px 32px -16px rgba(0, 0, 0, 0.4);
 }
 
 * { box-sizing: border-box; }
