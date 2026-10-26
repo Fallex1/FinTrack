@@ -70,7 +70,7 @@ export default function TransactionList({
                 {(() => { const ic = categories.find((c) => c.id === t.category)?.icon; return ic ? <img src={ic} alt="" className="w-5 h-5" /> : <span className={iconColor}>{catIcon[catName(t.category, categories)] ?? catIcon.default}</span>; })()}
               </span>
             </div>
-            <div className="col-span-5 min-w-0">
+            <div className="col-span-4 min-w-0">
               <p className="text-sm font-medium text-dark truncate">
                 {t.note || catName(t.category, categories)}
               </p>
@@ -92,23 +92,23 @@ export default function TransactionList({
               {fmtRp(t.amount)}
             </div>
             {onEdit && (
-              <div className="col-span-1 flex justify-end gap-1">
+              <div className="col-span-2 flex justify-end gap-1">
                 <button
                   type="button"
                   onClick={() => onEdit(t)}
                   aria-label="Edit"
-                  className="p-1 text-muted hover:text-dark transition"
+                  className="p-2 rounded-lg text-muted hover:text-dark hover:bg-light transition"
                 >
-                  <IconEdit className="w-4 h-4" />
+                  <IconEdit className="w-6 h-6" />
                 </button>
                 {onDelete && (
                   <button
                     type="button"
                     onClick={() => onDelete(t.id)}
                     aria-label="Hapus"
-                    className="p-1 text-muted hover:text-red-500 transition"
+                    className="p-2 rounded-lg text-muted hover:text-red-500 hover:bg-light transition"
                   >
-                    <IconTrash className="w-4 h-4" />
+                    <IconTrash className="w-6 h-6" />
                   </button>
                 )}
               </div>
