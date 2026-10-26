@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    @apply bg-light text-secondary antialiased;
+    font-family: "Open Sans", ui-sans, system-ui, sans-serif;
+  }
+}
