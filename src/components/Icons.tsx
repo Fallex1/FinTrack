@@ -95,3 +95,39 @@ export const IconPlus = ({ className }: P) => (
     <path d="M12 5v14" />
   </Svg>
 );
+
+export const IconTrash = ({ className }: P) => (
+  <Svg className={className}>
+    <path d="M3 6h18" />
+    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+    <path d="M10 11v6" />
+    <path d="M14 11v6" />
+    <path d="M9 6V4a3 3 0 1 1 6 0v2" />
+  </Svg>
+);
+
+export const IconEdit = ({ className }: P) => (
+  <Svg className={className}>
+    <path d="M11 4.059 13 6l7-7" />
+    <path d="M12 18H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4.5" />
+  </Svg>
+);export const IconUpload = ({ className }: P) => (
+  <Svg className={className}>
+    <path d="M21 15v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2l3-3h6l3 3h2a2 2 0 0 1 2 2z" />
+    <path d="M12 18V8" />
+    <path d="M9 11l3 3 3-3" />
+  </Svg>
+);
+
+export const IconTag = ({ className }: P) => (
+  <Svg className={className}>
+    <path d="M9.25 12.5L6 15.75V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v10.75l-3.25-3.25z" />
+  </Svg>
+);
+
+export const IconFileText = ({ className }: P) => (
+  <Svg className={className}>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <path d="M14 2v6h6" />
+  </Svg>
+);

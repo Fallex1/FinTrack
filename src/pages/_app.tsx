@@ -1,10 +1,11 @@
 import Head from "next/head";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { AppProvider } from "@/context/AppContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <AppProvider>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -14,6 +15,6 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Component {...pageProps} />
-    </>
+    </AppProvider>
   );
 }
