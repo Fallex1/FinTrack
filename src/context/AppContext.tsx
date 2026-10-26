@@ -42,6 +42,7 @@ const AppCtx = createContext<{
   addTransaction: (t: Omit<Transaction, "id">) => void;
   addCategory: (name: string, type: "income" | "expense", color: string, icon?: string) => void;
   addDebt: (d: Omit<Debt, "id">) => void;
+  updateDebt: (id: string, d: Partial<Omit<Debt, "id">>) => void;
   addSubscription: (s: Omit<Subscription, "id">) => void;
   addSaving: (s: Omit<Saving, "id">) => void;
   updateSaving: (id: string, delta: number) => void;
@@ -94,6 +95,9 @@ export function AppProvider({ children }: PropsWithChildren) {
   const addDebt = (d: Omit<Debt, "id">) =>
     setStore((s) => ({ ...s, debts: [{ ...d, id: uid() }, ...s.debts] }));
 
+  const updateDebt = (id: string, d: Partial<Omit<Debt, "id">>) =>
+    setStore((s) => ({ ...s, debts: s.debts.map((x) => (x.id === id ? { ...x, ...d } : x)) }));
+
   const addSubscription = (s2: Omit<Subscription, "id">) =>
     setStore((s) => ({ ...s, subscriptions: [{ ...s2, id: uid() }, ...s.subscriptions] }));
 
@@ -128,7 +132,7 @@ export function AppProvider({ children }: PropsWithChildren) {
 
   return (
     <AppCtx.Provider
-      value={{ store, update, addWallet, addTransaction, addCategory, addDebt, addSubscription, addSaving, updateSaving, updateTransaction, setProfile, setPeriod, totalBalance, balanceInPeriod }}
+      value={{ store, update, addWallet, addTransaction, addCategory, addDebt, updateDebt, addSubscription, addSaving, updateSaving, updateTransaction, setProfile, setPeriod, totalBalance, balanceInPeriod }}
     >
       {children}
     </AppCtx.Provider>
