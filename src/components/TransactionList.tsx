@@ -52,6 +52,8 @@ export default function TransactionList({
   categories,
   wallets,
   showDate = true,
+  onEdit,
+  onDelete,
 }: TransactionListProps) {
   return (
     <div className="space-y-1 overflow-hidden max-w-full">
@@ -89,6 +91,28 @@ export default function TransactionList({
               {sign}
               {fmtRp(t.amount)}
             </div>
+            {onEdit && (
+              <div className="col-span-1 flex justify-end gap-1">
+                <button
+                  type="button"
+                  onClick={() => onEdit(t)}
+                  aria-label="Edit"
+                  className="p-1 text-muted hover:text-dark transition"
+                >
+                  <IconEdit className="w-4 h-4" />
+                </button>
+                {onDelete && (
+                  <button
+                    type="button"
+                    onClick={() => onDelete(t.id)}
+                    aria-label="Hapus"
+                    className="p-1 text-muted hover:text-red-500 transition"
+                  >
+                    <IconTrash className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         );
       })}

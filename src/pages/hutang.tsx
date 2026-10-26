@@ -18,7 +18,7 @@ export default function Hutang() {
     setForm({ person: "", total: 0, paid: 0, direction: "hutang", note: "" });
   };
 
-  const handleBayar = (d: Debt, v: number) => { if (d.direction === "hutang") return; const np = Math.min(d.total, Math.max(d.paid, d.paid + v)); updateDebt(d.id, { paid: np }); };
+  const handleBayar = (d: Debt, v: number) => { const np = Math.min(d.total, Math.max(d.paid, d.paid + v)); updateDebt(d.id, { paid: np }); };
   const removeDebt = (id: string) => update({ debts: store.debts.filter((d) => d.id !== id) });
 
   const hutang = store.debts.filter((d) => d.direction === "hutang");
@@ -49,7 +49,7 @@ export default function Hutang() {
                     {d.direction === "hutang" ? "Hutang" : "Piutang"} · {fmtRp(d.total - d.paid)} tersisa
                   </p>
                   {d.note && <p className="text-xs text-muted truncate">{d.note}</p>}
-                  {d.direction === "hutang" && d.total - d.paid > 0 && (
+                  {d.total - d.paid > 0 && (
                     <form key={d.id+"-bayar"} onSubmit={(e) => { e.preventDefault(); handleBayar(d, bayarAmt[d.id] ?? 0); }} className="mt-2 flex gap-1 items-end">
                       <NumberInput value={bayarAmt[d.id] ?? 0} onChange={(v) => setBayarAmt((b) => ({ ...b, [d.id]: v }))} placeholder="0" />
                       <button type="submit" className="h-8 px-3 rounded-lg bg-primary text-white text-xs font-medium hover:bg-primary/80">Bayar</button>

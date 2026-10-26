@@ -20,9 +20,10 @@ export default function Tabungan() {
 
   const handleSetor = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!setor.savingId || setor.amount <= 0) return;
-    updateSaving(setor.savingId, setor.amount);
-    setSetor({ savingId: "", amount: 0 });
+    const id = setor.savingId || store.savings[0]?.id;
+    if (!id || setor.amount <= 0) return;
+    updateSaving(id, setor.amount);
+    setSetor({ savingId: id, amount: 0 });
   };
 
   const removeSave = (id: string) => update({ savings: store.savings.filter((s) => s.id !== id) });

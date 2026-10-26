@@ -21,6 +21,7 @@ export default function NumberInput({ value, onChange, label, placeholder = "0",
         min={min}
         value={value > 0 ? fmtNum(value) : ""}
         onChange={(e) => onChange(parseNum(e.target.value))}
+        onKeyUp={(e) => onChange(parseNum((e.target as HTMLInputElement).value))}
         className="w-full px-3 py-2 border border-light rounded-lg text-dark focus:outline-none focus:ring-2 focus:ring-primary text-sm"
       />
     </div>
