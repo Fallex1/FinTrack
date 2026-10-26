@@ -1,4 +1,5 @@
-import type { Transaction, Category, Wallet, TxType } from "@/lib/types";
+import type { Transaction, Category, Wallet } from "@/lib/types";
+import type { ReactNode } from "react";
 import { fmtRp } from "@/lib/types";
 import {
   IconBriefcase,
@@ -7,9 +8,9 @@ import {
   IconShoppingBag,
   IconPiggyBank,
   IconTicket,
-  IconTrendingDown,
   IconFileText,
-  IconTag,
+  IconEdit,
+  IconTrash,
 } from "@/components/Icons";
 
 export type TransactionListProps = {
@@ -17,14 +18,11 @@ export type TransactionListProps = {
   categories: Category[];
   wallets: Wallet[];
   showDate?: boolean;
+  onEdit?: (t: Transaction) => void;
+  onDelete?: (id: string) => void;
 };
 
-const iconFor: Record<TxType, React.ReactNode> = {
-  income: <IconTrendingDown className="w-4 h-4 text-primary" />,
-  expense: <IconShoppingBag className="w-4 h-4 text-red-500" />,
-};
-
-const catIcon: Record<string, React.ReactNode> = {
+const catIcon: Record<string, ReactNode> = {
   Gaji: <IconBriefcase className="w-5 h-5" />,
   Makan: <IconUtensils className="w-5 h-5" />,
   Transfer: <IconArrowLeftRight className="w-5 h-5" />,

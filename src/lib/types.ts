@@ -10,7 +10,7 @@ export type Transaction = {
   note: string;
 };
 export type Category = { id: string; name: string; type: TxType; color: string; icon?: string };
-export type Debt = { id: string; person: string; total: number; paid: number; note: string };
+export type Debt = { id: string; person: string; total: number; paid: number; note: string; direction: "hutang" | "piutang" };
 export type Subscription = { id: string; name: string; amount: number; cycle: string; note: string };
 export type Saving = { id: string; name: string; goal: number; saved: number; note?: string };
 export type Profile = { name: string; avatar: string | null };
@@ -29,3 +29,10 @@ export const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().to
 export const today = () => new Date().toISOString().slice(0, 10);
 export const fmtRp = (n: number) =>
   "Rp " + Math.round(n).toLocaleString("id-ID");
+
+export const fmtNum = (n: number) => Math.round(n).toLocaleString("id-ID");
+
+export const parseNum = (s: string) => {
+  const n = parseFloat(s.replace(/\./g, "").replace(/[^\d-]/g, ""));
+  return isNaN(n) ? 0 : n;
+};

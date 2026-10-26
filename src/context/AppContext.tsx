@@ -44,6 +44,8 @@ const AppCtx = createContext<{
   addDebt: (d: Omit<Debt, "id">) => void;
   addSubscription: (s: Omit<Subscription, "id">) => void;
   addSaving: (s: Omit<Saving, "id">) => void;
+  updateSaving: (id: string, delta: number) => void;
+  updateTransaction: (id: string, t: Omit<Transaction, "id">, old: Transaction) => void;
   setProfile: (p: Profile) => void;
   setPeriod: (p: Period) => void;
   totalBalance: number;
@@ -98,6 +100,22 @@ export function AppProvider({ children }: PropsWithChildren) {
   const addSaving = (saving: Omit<Saving, "id">) =>
     setStore((s) => ({ ...s, savings: [{ ...saving, id: uid() }, ...s.savings] }));
 
+  const updateSaving = (id: string, delta: number) =>
+    setStore((s) => ({
+      ...s,
+      savings: s.savings.map((sv) => (sv.id === id ? { ...sv, saved: Math.max(0, sv.saved + delta) } : sv)),
+    }));
+
+  const updateTransaction = (id: string, t: Omit<Transaction, "id">, old: Transaction) =>
+    setStore((s) => {
+      const delta = (t.type === "income" ? t.amount : -t.amount) - (old.type === "income" ? old.amount : -old.amount);
+      return {
+        ...s,
+        transactions: s.transactions.map((x) => (x.id === id ? { ...t, id } : x)),
+        wallets: s.wallets.map((w) => (w.id === t.walletId ? { ...w, balance: w.balance + delta } : w)),
+      };
+    });
+
   const setProfile = (p: Profile) => update({ profile: p });
   const setPeriod = (p: Period) => update({ period: p });
 
@@ -110,7 +128,7 @@ export function AppProvider({ children }: PropsWithChildren) {
 
   return (
     <AppCtx.Provider
-      value={{ store, update, addWallet, addTransaction, addCategory, addDebt, addSubscription, addSaving, setProfile, setPeriod, totalBalance, balanceInPeriod }}
+      value={{ store, update, addWallet, addTransaction, addCategory, addDebt, addSubscription, addSaving, updateSaving, updateTransaction, setProfile, setPeriod, totalBalance, balanceInPeriod }}
     >
       {children}
     </AppCtx.Provider>
