@@ -9,7 +9,7 @@ export type Transaction = {
   walletId: string;
   note: string;
 };
-export type Category = { id: string; name: string; type: TxType; color: string };
+export type Category = { id: string; name: string; type: TxType; color: string; icon?: string };
 export type Debt = { id: string; person: string; total: number; paid: number; note: string };
 export type Subscription = { id: string; name: string; amount: number; cycle: string; note: string };
 export type Saving = { id: string; name: string; goal: number; saved: number; note?: string };

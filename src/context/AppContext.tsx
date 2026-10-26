@@ -40,7 +40,7 @@ const AppCtx = createContext<{
   update: (patch: Partial<Store>) => void;
   addWallet: (name: string, balance: number, color: string) => void;
   addTransaction: (t: Omit<Transaction, "id">) => void;
-  addCategory: (name: string, type: "income" | "expense", color: string) => void;
+  addCategory: (name: string, type: "income" | "expense", color: string, icon?: string) => void;
   addDebt: (d: Omit<Debt, "id">) => void;
   addSubscription: (s: Omit<Subscription, "id">) => void;
   addSaving: (s: Omit<Saving, "id">) => void;
@@ -83,10 +83,10 @@ export function AppProvider({ children }: PropsWithChildren) {
       ),
     }));
 
-  const addCategory = (name: string, type: "income" | "expense", color: string) =>
+  const addCategory = (name: string, type: "income" | "expense", color: string, icon?: string) =>
     setStore((s) => ({
       ...s,
-      categories: [...s.categories, { id: uid(), name, type, color }],
+      categories: [...s.categories, { id: uid(), name, type, color, icon }],
     }));
 
   const addDebt = (d: Omit<Debt, "id">) =>

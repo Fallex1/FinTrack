@@ -67,7 +67,7 @@ export default function TransactionList({
           >
             <div className="col-span-1 flex-shrink-0">
               <span className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                <span className={iconColor}>{catIcon[catName(t.category, categories)] ?? catIcon.default}</span>
+                {(() => { const ic = categories.find((c) => c.id === t.category)?.icon; return ic ? <img src={ic} alt="" className="w-5 h-5" /> : <span className={iconColor}>{catIcon[catName(t.category, categories)] ?? catIcon.default}</span>; })()}
               </span>
             </div>
             <div className="col-span-5 min-w-0">
